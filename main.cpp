@@ -118,19 +118,7 @@ Car Wash
       2) Swap tools
       3) Validate menu choice with available tools, ingredients,and actions available. 
 
-   (5)Spoon
-   5 properties:
-      1) spoon dimensions
-      2) spoon carrying capacity
-      3) spoon contents
-      4) spoon orientation
-      5) spoon temperature 
-   3 things it can do:
-      1) fill with something (scoop attempt, can return a bool of true/false if not scoopable)
-      2) empty contents      (upturn spoon to release contents)
-      3) deliver contents    (move spoon filled with content to something else do transfer contents) 
-
-   (6)Apple Store
+   (5)Apple Store
    5 properties:
       1) Inventory of Apple products
       2) Location
@@ -142,7 +130,7 @@ Car Wash
       2) Sell Apple Products To Existing Customers
       3) Collect Money
 
-   (7)Wild Squirrel
+   (6)Wild Squirrel
    5 properties:
       1) Number of nuts in mouth
       2) Number of trees visited per hour
@@ -154,7 +142,7 @@ Car Wash
       2) Sprint to random location (inclusive of baby carriages)
       3) Chitter for random length of time.
 
-   (8)Dungeon Master 
+   (7)Dungeon Master 
    5 properties:
       1) List of voices and personas capable of enacting
       2) List of various dice to roll for actions/effects
@@ -166,7 +154,7 @@ Car Wash
       2) Request the party "roll for initiative"
       3) Laugh maniacally
 
-   (9)D&D Party Members
+   (8)D&D Party Members
    5 properties:
       1) Player character stats/attributes(age, sex, race, armor class, pasive perception, etc)
       2) Assortment of dice for rolling for actions and effects
@@ -178,7 +166,7 @@ Car Wash
       2) Listen to the dungeon master's amazing voices
       3) Roll for initiative
 
-   (10)Self Checkout Register
+   (9)Self Checkout Register
    5 properties:
       1) has screen for user interface
       2) has scanner for products
@@ -189,6 +177,18 @@ Car Wash
       1) ring up item
       2) accept payment
       3) print receipt
+
+   (10)Gaming Store
+   5 properties:
+      1) [Self Checkout Register]
+      2) [Microwave]
+      3) [D&D Party Members]
+      4) [Dungeon Master]
+      5) [Smart Power Strip]
+   3 things it can do:
+      1) Host Game Sessions   (for the dungeon masters and d&d players, microwave for food)
+      2) Sell Gaming Supplies (dice, paper, books, self-checkout)
+      3) Users can pay for power (smart power strip, self-checkout)
 
 */
 
