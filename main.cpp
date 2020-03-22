@@ -246,7 +246,13 @@ struct CarWash //2)
 // ==================================
 // WingTangWong's UDT(s)
 // ==================================
-  
+
+#define MAX_NAME_LENGTH 255
+#define MAX_LOG_LENGTH  32768
+#define MAX_ID          32768
+#define MAX_ACTIONS     32768
+
+
 //   ==============================
 //   (1)Drive Thru Coffee Stand 
 struct DriveThruCoffeeStand
@@ -269,7 +275,7 @@ struct DriveThruCoffeeStand
 //      3) stores inventory of consumables 
          struct InventoryItem
          {
-            char name[255];
+            char name[MAX_NAME_LENGTH];
             int  numberInStock;
             int  numberOnOrder;
             float pricePerItem;
@@ -277,16 +283,16 @@ struct DriveThruCoffeeStand
             bool perishable;
          };
 
-         InventoryItem storeInventory[32768]; // would we ever need more than 32767 different items?
+         InventoryItem storeInventory[MAX_ID]; // would we ever need more than 32767 different items?
 
 
          struct MenuItem
          {
-            char name[255];
+            char name[MAX_NAME_LENGTH];
             int requiredIngredient; // this would be an inventory item ID number
          };
 
-         MenuItem availableProducts[32768]; // that's a huge menu... actually, multiple entries for the same item for multi-ingredient
+         MenuItem availableProducts[MAX_ID]; // that's a huge menu... actually, multiple entries for the same item for multi-ingredient
                                             // recipes. 
 
 
@@ -299,7 +305,7 @@ struct DriveThruCoffeeStand
             bool refunded;
          };
 
-         IndividualSale financialTransactions[32768]; // I'm sure this will be fine....
+         IndividualSale financialTransactions[MAX_LOG_LENGTH]; // I'm sure this will be fine....
 
 //      5) stores daily business metrics
 
@@ -310,7 +316,7 @@ struct DriveThruCoffeeStand
             float totalRefunded;
          };
 
-         DailyMetric businessLog[3699]; // "10 years" of logs with padding... lol
+         DailyMetric businessLog[MAX_LOG_LENGTH]; 
 
 //   3 things it can do:
 //      1) take orders
@@ -397,7 +403,7 @@ struct SmartPowerStrip
 
 //      4) stored history of socket state changes
          
-        PowerDataPoint socketHistory[32768];
+        PowerDataPoint socketHistory[MAX_LOG_LENGTH];
 
 //      5) stored 'uptime' value
 
@@ -444,51 +450,51 @@ struct KitchenDroid
 //      2) Inventory of alternate hardware(s) swappable. 
          struct DroidTools
          {
-            char   name[255];
+            char   name[MAX_NAME_LENGTH];
             int    toolFeature;
             double toolPositionX, toolPositionY, toolPositionZ;
             bool   toolUsesPower;
          };
 
-         DroidTools availableTools[255];
+         DroidTools availableTools[MAX_NAME_LENGTH];
 
 //      3) List of activities performable with arm/tools 
 
          struct ArmActions
          {
-            char name[255];
+            char name[MAX_NAME_LENGTH];
             int  toolIDNeeded;
             DroidArmature armChanges;
          };
 
          struct ArmSequences
          {
-            char name[255];
-            ArmActions sequence[32768];
+            char name[MAX_NAME_LENGTH];
+            ArmActions sequence[MAX_ACTIONS];
          };
 
-         ArmSequences availableActions[32768]; 
+         ArmSequences availableActions[MAX_ACTIONS]; 
 
 //      4) List of ingredients in stock
 
          struct Ingredient
          {
-            char name[255];
+            char name[MAX_NAME_LENGTH];
             double amountAvailable;
          };
 
-         Ingredient kitchenInventory[32768];
+         Ingredient kitchenInventory[MAX_ID];
 
 
 //      5) Menu of dishes Kitchen Droid can make
 
          struct Recipes
          {
-            Ingredient ingredientsNeeded[32768];
+            Ingredient ingredientsNeeded[MAX_ID];
             int toolUsed;
          };
 
-         Recipes kitchenRecipes[32768];
+         Recipes kitchenRecipes[MAX_ID];
 
 //   3 things it can do:
 //      1) Prepare Meal From Menu
