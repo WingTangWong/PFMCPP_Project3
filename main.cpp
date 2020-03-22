@@ -251,7 +251,7 @@ struct CarWash //2)
 #define MAX_LOG_LENGTH  32768
 #define MAX_ID          32768
 #define MAX_ACTIONS     32768
-
+#define MAX_DESC_LENGTH 32768
 
 //   ==============================
 //   (1)Drive Thru Coffee Stand 
@@ -615,23 +615,76 @@ struct DungeonMaster
 {
 //   5 properties:
 //      1) List of voices and personas capable of enacting
+         struct Voice
+         {
+            char name[MAX_NAME_LENGTH];
+            char gender;
+            char description[MAX_DESC_LENGTH];
+         };
+
+         Voice dungeonMasterVoices[MAX_ID];
 
 //      2) List of various dice to roll for actions/effects
+         struct Dice
+         {
+            char name[MAX_NAME_LENGTH]; // yes... some dice get names...
+            int numberOfSides;
+         };
+
+         Dice bagOfDice[MAX_ID];
 
 //      3) List of ideas on how to manipulate the party
+         struct Ideas
+         {
+            char name[MAX_NAME_LENGTH];
+            char description[MAX_DESC_LENGTH];
+         };
+
+         Ideas dungeonMasterIdeas[MAX_ID];
 
 //      4) List of documents and reference books on hand
 
+         struct Document
+         {
+            char name[MAX_NAME_LENGTH];
+            char sourceMaterial[MAX_NAME_LENGTH];
+            char dungeonMasterNotes[MAX_DESC_LENGTH];
+         };
+
+         Document dungeonMasterReferences[MAX_ID];
+
 //      5) List of player penalties for being difficult *cough*blue lightning*cough*
 
+         struct Annoyances
+         {
+            char name[MAX_NAME_LENGTH];
+            char description[MAX_DESC_LENGTH];
+         };
+
+         Annoyances dungeonMasterPetPeeves[MAX_ID];
+
+         struct Penalties
+         {
+            char name[MAX_NAME_LENGTH]; // it might involve blue lightning... just saying..
+            char description[MAX_DESC_LENGTH];
+            Dice damageExpected[MAX_ID]; // how many dice... is too much?
+         };
+
+         Penalties dungeonMasterPenalties[MAX_ID];
+         
 
 //   3 things it can do:
 //      1) Enact voices and personas to party
+         
+         void performCoolVoice( int voiceID , int situationID );
 
 //      2) Request the party "roll for initiative"
 
+         void requestRollForInitiative();
+
 //      3) Laugh maniacally
 
+         void executeManiacalLaugh(int laughID );
 
 };
 //
