@@ -243,132 +243,283 @@ struct CarWash //2)
     Car carBeingServiced;  
 };
 
+// ==================================
+// WingTangWong's UDT(s)
+// ==================================
+  
+//   ==============================
+//   (1)Drive Thru Coffee Stand 
+struct DriveThruCoffeeStand
+{
+//   5 properties:
+//      1) physical attributes (location, dimensions, color, size, orientation)
+         double longitude   = 37.331796;
+         double latitude    = -122.0296753;
+         float  orientation = 180.00;
+         double width  = 512.000;
+         double length = 512.000;
+         double height = 512.000;
+         int    colorRed   = 200;
+         int    colorGreen = 200;
+         int    colorBlue  = 200;
 
-/*
-1)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
+//      2) open for business or not (boolean or array of times to be checked against)
+         bool openForBusiness = True;
 
-/*
-2)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
+//      3) stores inventory of consumables 
+         struct inventoryItem
+         {
+            char name[255];
+            int  numberInStock;
+            int  numberOnOrder;
+            float pricePerItem;
+            float itemWeight;
+            bool perishable;
+         };
 
-/*
-3)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
+         inventoryItem storeInventory[32767]; // would we ever need more than 32767 different items?
 
-/*
-4)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
 
-/*
-5)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
+         struct menuItem
+         {
+            char name[255];
+            int requiredIngredient; // this would be an inventory item ID number
+         };
 
-/*
-6)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
+         menuItem availableProducts[32767]; // that's a huge menu... actually, multiple entries for the same item for multi-ingredient
+                                            // recipes. 
 
-/*
-7)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
 
-/*
-8)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
+//      4) stores financial transactions
+         struct individualSale
+         {
+            int timeOfSale;
+            int transactionID;
+            int itemID;
+            bool refunded;
+         };
 
-/*
-9)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
+         individualSale financialTransactions[32768]; // I'm sure this will be fine....
+
+//      5) stores daily business metrics
+
+         struct dailyMetric
+         {
+            float grossSales;
+            float netProfits;
+            float totalRefunded;
+         };
+
+         dailyMetric businessLog[3699]; // "10 years" of logs with padding... lol
+
+//   3 things it can do:
+//      1) take orders
+         bool takeOrder( menuItem orderItem ); // returns false if the order is invalid, true if the order is valid
+
+//      2) produce goods for order
+         bool createProductAndUpdateInventory( menuItem orderItem ); 
+//      3) accept payment for goods
+         bool processPayment( individualSale tx, dailyMetrix log );
+         
+//
+};
+//   ==============================
+//   (2)Microwave
+struct Microwave
+{
+//   5 properties:
+//      1) wattage
+         float wattage;
+
+//      2) plugged in or not
+         bool powerAvailable;
+//      3) active or not
+         bool active;
+
+//      4) current settings
+         int powerLevel;
+
+//      5) time remaining
+         float remainingTime;
+
+
+
+//   3 things it can do:
+//      1) open/close door
+         void doorChangeState( bool openDoor );         
+
+//      2) set time/power levels
+         void setPowerLevel( int newPowerLevel );
+         void setTimer( int newTimeRemaining );
+
+//      3) start/stop
+         void startMicrowave();
+//
+};
+//   ==============================
+//   (3)Smart Power Strip
+struct SmartPowerStrip
+{
+//   5 properties:
+//      1) network address(ip address/netmask/gateway/dns)
+         struct networkConfig
+         {
+            char ipAddress[4]; 
+            char netmask[4];
+            char gateway[4];
+            bool configured;
+            bool online;
+         };
+
+
+//      2) list of individual socket states (on/off) 
+
+         struct socketState
+         {
+            bool enabled;
+            bool toggling;
+            int countDownForToggle;
+            bool somethingPullingPower;
+            double powerConsumed;
+         };
+
+         socketState sockets[8]; // 8 socket power strip
+
+
+//      3) stored history of power consumption per socket 
+
+
+
+
+//      4) stored history of socket state changes
+
+//      5) stored 'uptime' value
+
+
+//   3 things it can do:
+//      1) change individual socket state: on-to-off,off-to-on,toggle/bounce
+
+//      2) perform global socket change: all on, all off, all toggle/bounce
+
+//      3) reconfigure network settings
+
+
+//
+};
+//   ==============================
+//   (4)Kitchen Droid
+struct 
+{
+//   5 properties:
+//      1) Left/Right armature hardware installed: none, or one of several kitchen tool ID(s) assigned/loaded.
+//      2) Inventory of alternate hardware(s) swappable. 
+//      3) List of activities performable with arm/tools 
+//      4) List of ingredients in stock
+//      5) Menu of dishes Kitchen Droid can make
+//   3 things it can do:
+//      1) Prepare Meal From Menu
+//      2) Swap tools
+//      3) Validate menu choice with available tools, ingredients,and actions available. 
+};
+//
+//   ==============================
+//   (5)Apple Store
+struct 
+{
+//   5 properties:
+//      1) Inventory of Apple products
+//      2) Location
+//      3) Hours of operation
+//      4) Number of staff
+//      5) Hourly Profit
+//   3 things it can do:
+//      1) Sell Apple Products To New Customers
+//      2) Sell Apple Products To Existing Customers
+//      3) Collect Money
+};
+//
+//   ==============================
+//   (6)Wild Squirrel
+struct 
+{
+//   5 properties:
+//      1) Number of nuts in mouth
+//      2) Number of trees visited per hour
+//      3) Has Jumped In Baby Carriage in Lifetime (bool)
+//      4) Is Sprinting(bool)
+//      5) Is Chittering(bool)
+//   3 things it can do:
+//      1) Place Nut In Mouth
+//      2) Sprint to random location (inclusive of baby carriages)
+//      3) Chitter for random length of time.
+};
+//
+//   ==============================
+//   (7)Dungeon Master 
+struct 
+{
+//   5 properties:
+//      1) List of voices and personas capable of enacting
+//      2) List of various dice to roll for actions/effects
+//      3) List of ideas on how to manipulate the party
+//      4) List of documents and reference books on hand
+//      5) List of player penalties for being difficult *cough*blue lightning*cough*
+//   3 things it can do:
+//      1) Enact voices and personas to party
+//      2) Request the party "roll for initiative"
+//      3) Laugh maniacally
+};
+//
+//   ==============================
+//   (8)D&D Party Members
+struct 
+{
+//   5 properties:
+//      1) Player character stats/attributes(age, sex, race, armor class, pasive perception, etc)
+//      2) Assortment of dice for rolling for actions and effects
+//      3) Is a murderhobo (bool) (senselessly killing non-player-characters in game)
+//      4) Fearful of Dungeon Master (bool)
+//      5) How badly they want to kill "that partymember" (double)
+//   3 things it can do:
+//      1) Fulfill quests
+//      2) Listen to the dungeon master's amazing voices
+//      3) Roll for initiative
+};
+//
+//   ==============================
+//   (9)Self Checkout Register
+struct 
+{
+//   5 properties:
+//      1) has screen for user interface
+//      2) has scanner for products
+//      3) has scale for bagging and validation of products
+//      4) has payment interface
+//      5) has receipt printer
+//   3 things it can do:
+//      1) ring up item
+//      2) accept payment
+//      3) print receipt
+};
+//   ==============================
+//   (10)Gaming Store
+struct 
+{
+//   5 properties:
+//      1) [Self Checkout Register]
+//      2) [Microwave]
+//      3) [D&D Party Members]
+//      4) [Dungeon Master]
+//      5) [Smart Power Strip]
+//   3 things it can do:
+//      1) Host Game Sessions   (for the dungeon masters and d&d players, microwave for food)
+//      2) Sell Gaming Supplies (dice, paper, books, self-checkout)
+//      3) Users can pay for power (smart power strip, self-checkout)
+};
+
+
+
+
 
 /*
 10)
