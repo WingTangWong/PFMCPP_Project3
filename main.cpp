@@ -513,14 +513,74 @@ struct AppleStore
 {
 //   5 properties:
 //      1) Inventory of Apple products
+         struct AppleItem 
+         {
+            char name[MAX_NAME_LENGTH];
+            float price;
+            int numberInStock;
+         };
+         
 //      2) Location
 //      3) Hours of operation
+//
+         struct Hours 
+         {
+            int openingHour;
+            int closingHour;
+         };
+
+         struct Location 
+         {
+            char name[MAX_NAME_LENGTH];
+            Hours storeHours[7];
+            AppleItem inventory[MAX_ID];
+         };
+
 //      4) Number of staff
+         struct Staff 
+         {
+            char name[MAX_NAME_LENGTH];
+            int storeLocation;
+            int payGrade;
+            Hours schedule[7];
+         };
+
+         Staff appleEmployees[MAX_ID];
+
 //      5) Hourly Profit
+         struct Transactions
+         {
+            int storeLocation;
+            double transactionMoment;
+            double transactionAmount;
+            int appleItemsInTransaction[MAX_LOG_LENGTH];
+         };
+
+         Transactions appleStoreTransactions[MAX_LOG_LENGTH];
+
+         struct HourlyProfits
+         {
+            int storeLocation;
+            int hour;
+            double timeframe;
+            double grossSales;
+            double netProfit;
+         };
+
+         HourlyProfits appleStoreHourlyProfits[MAX_ID];
+
 //   3 things it can do:
 //      1) Sell Apple Products To New Customers
+
+         void sellAppleProductToNewCustomer( int storeLocation, int itemID[MAX_ID] );
+
 //      2) Sell Apple Products To Existing Customers
+
+         void sellAppleProductToExistingCustomer( int storeLocation, int customerID, int itemID[MAX_ID], int existingSalesHistory );
+
 //      3) Collect Money
+         bool collectMoney( int storeLocation, int customerID, int transactionID );
+
 };
 //
 //   ==============================
