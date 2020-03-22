@@ -589,14 +589,24 @@ struct WildSquirrel
 {
 //   5 properties:
 //      1) Number of nuts in mouth
+         int nutsInMouth;
 //      2) Number of trees visited per hour
+         int treesVisitedPerHour;
 //      3) Has Jumped In Baby Carriage in Lifetime (bool)
+         bool visitedBabyCarriage;
 //      4) Is Sprinting(bool)
+         bool isSprinting;
 //      5) Is Chittering(bool)
+         bool isChittering;
+
 //   3 things it can do:
 //      1) Place Nut In Mouth
+         bool placeNutInMouth(); // might fail...
 //      2) Sprint to random location (inclusive of baby carriages)
+         bool sprintToRandomLocation(); // might fail
 //      3) Chitter for random length of time.
+         float performChittering(); // returns random value indicating how long chittering will go on for
+
 };
 //
 //   ==============================
@@ -605,14 +615,24 @@ struct DungeonMaster
 {
 //   5 properties:
 //      1) List of voices and personas capable of enacting
+
 //      2) List of various dice to roll for actions/effects
+
 //      3) List of ideas on how to manipulate the party
+
 //      4) List of documents and reference books on hand
+
 //      5) List of player penalties for being difficult *cough*blue lightning*cough*
+
+
 //   3 things it can do:
 //      1) Enact voices and personas to party
+
 //      2) Request the party "roll for initiative"
+
 //      3) Laugh maniacally
+
+
 };
 //
 //   ==============================
@@ -621,14 +641,24 @@ struct DNDPartyMembers
 {
 //   5 properties:
 //      1) Player character stats/attributes(age, sex, race, armor class, pasive perception, etc)
+
 //      2) Assortment of dice for rolling for actions and effects
+
 //      3) Is a murderhobo (bool) (senselessly killing non-player-characters in game)
+
 //      4) Fearful of Dungeon Master (bool)
+
 //      5) How badly they want to kill "that partymember" (double)
+
+
 //   3 things it can do:
 //      1) Fulfill quests
+
 //      2) Listen to the dungeon master's amazing voices
+
 //      3) Roll for initiative
+
+
 };
 //
 //   ==============================
@@ -637,14 +667,24 @@ struct SelfCheckoutRegister
 {
 //   5 properties:
 //      1) has screen for user interface
+
 //      2) has scanner for products
+
 //      3) has scale for bagging and validation of products
+
 //      4) has payment interface
+
 //      5) has receipt printer
+
+
 //   3 things it can do:
 //      1) ring up item
+
 //      2) accept payment
+
 //      3) print receipt
+
+
 };
 //   ==============================
 //   (10)Gaming Store
@@ -652,14 +692,24 @@ struct GamingStore
 {
 //   5 properties:
 //      1) [Self Checkout Register]
+
 //      2) [Microwave]
+
 //      3) [D&D Party Members]
+
 //      4) [Dungeon Master]
+
 //      5) [Smart Power Strip]
+
+
 //   3 things it can do:
 //      1) Host Game Sessions   (for the dungeon masters and d&d players, microwave for food)
+
 //      2) Sell Gaming Supplies (dice, paper, books, self-checkout)
+
 //      3) Users can pay for power (smart power strip, self-checkout)
+
+
 };
 
 
