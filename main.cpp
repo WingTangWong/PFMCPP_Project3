@@ -471,21 +471,33 @@ struct KitchenDroid
 
 //      4) List of ingredients in stock
 
+         struct ingredient
+         {
+            char name[255];
+            double amountAvailable;
+         };
 
-
+         ingredient kitchenInventory[32768];
 
 
 //      5) Menu of dishes Kitchen Droid can make
 
+         struct recipes
+         {
+            ingredient ingredientsNeeded[32768];
+            int toolUsed;
+         };
+
+         recipes kitchenRecipes[32768];
 
 //   3 things it can do:
 //      1) Prepare Meal From Menu
-
+         void prepareMeal( int recipe );
 //      2) Swap tools
+         bool swapTool( int toolID, int armID );
 
 //      3) Validate menu choice with available tools, ingredients,and actions available. 
-
-
+         bool canPrepare( int recipe );
 };
 
 
