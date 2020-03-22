@@ -277,7 +277,7 @@ struct DriveThruCoffeeStand
             bool perishable;
          };
 
-         inventoryItem storeInventory[32768]; // would we ever need more than 32767 different items?
+         InventoryItem storeInventory[32768]; // would we ever need more than 32767 different items?
 
 
          struct MenuItem
@@ -286,7 +286,7 @@ struct DriveThruCoffeeStand
             int requiredIngredient; // this would be an inventory item ID number
          };
 
-         menuItem availableProducts[32768]; // that's a huge menu... actually, multiple entries for the same item for multi-ingredient
+         MenuItem availableProducts[32768]; // that's a huge menu... actually, multiple entries for the same item for multi-ingredient
                                             // recipes. 
 
 
@@ -299,7 +299,7 @@ struct DriveThruCoffeeStand
             bool refunded;
          };
 
-         individualSale financialTransactions[32768]; // I'm sure this will be fine....
+         IndividualSale financialTransactions[32768]; // I'm sure this will be fine....
 
 //      5) stores daily business metrics
 
@@ -310,16 +310,16 @@ struct DriveThruCoffeeStand
             float totalRefunded;
          };
 
-         dailyMetric businessLog[3699]; // "10 years" of logs with padding... lol
+         DailyMetric businessLog[3699]; // "10 years" of logs with padding... lol
 
 //   3 things it can do:
 //      1) take orders
-         bool takeOrder( menuItem orderItem ); // returns false if the order is invalid, true if the order is valid
+         bool takeOrder( MenuItem orderItem ); // returns false if the order is invalid, true if the order is valid
 
 //      2) produce goods for order
-         bool createProductAndUpdateInventory( menuItem orderItem ); 
+         bool createProductAndUpdateInventory( MenuItem orderItem ); 
 //      3) accept payment for goods
-         bool processPayment( individualSale tx, dailyMetric log );
+         bool processPayment( IndividualSale tx, DailyMetric log );
          
 //
 };
@@ -383,12 +383,12 @@ struct SmartPowerStrip
             double powerConsumed;
          };
 
-         socketState sockets[8]; // 8 socket power strip
+         SocketState sockets[8]; // 8 socket power strip
 
 
 //      3) stored history of power consumption per socket 
 
-         struct powerDataPoint
+         struct PowerDataPoint
          {
             double uptime;
             double powerConsumed=0.0;
@@ -397,7 +397,7 @@ struct SmartPowerStrip
 
 //      4) stored history of socket state changes
          
-        powerDataPoint socketHistory[32768];
+        PowerDataPoint socketHistory[32768];
 
 //      5) stored 'uptime' value
 
@@ -418,7 +418,7 @@ struct SmartPowerStrip
          void allSocketToggle( float waitBeforeOn );
 
 //      3) reconfigure network settings
-         void setIP( networkConfig newConfig );
+         void setIP( NetworkConfig newConfig );
 };
 
 //   ==============================
@@ -439,7 +439,7 @@ struct KitchenDroid
             double segmentRotationZ[3];
          };
 
-         droidArmature droidArms[2];
+         DroidArmature droidArms[2];
 
 //      2) Inventory of alternate hardware(s) swappable. 
          struct DroidTools
@@ -450,7 +450,7 @@ struct KitchenDroid
             bool   toolUsesPower;
          };
 
-         droidTools availableTools[255];
+         DroidTools availableTools[255];
 
 //      3) List of activities performable with arm/tools 
 
@@ -458,16 +458,16 @@ struct KitchenDroid
          {
             char name[255];
             int  toolIDNeeded;
-            droidArmature armChanges;
+            DroidArmature armChanges;
          };
 
          struct ArmSequences
          {
             char name[255];
-            armActions sequence[32768];
+            ArmActions sequence[32768];
          };
 
-         armSequences availableActions[32768]; 
+         ArmSequences availableActions[32768]; 
 
 //      4) List of ingredients in stock
 
@@ -477,18 +477,18 @@ struct KitchenDroid
             double amountAvailable;
          };
 
-         ingredient kitchenInventory[32768];
+         Ingredient kitchenInventory[32768];
 
 
 //      5) Menu of dishes Kitchen Droid can make
 
          struct Recipes
          {
-            ingredient ingredientsNeeded[32768];
+            Ingredient ingredientsNeeded[32768];
             int toolUsed;
          };
 
-         recipes kitchenRecipes[32768];
+         Recipes kitchenRecipes[32768];
 
 //   3 things it can do:
 //      1) Prepare Meal From Menu
