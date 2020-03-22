@@ -267,7 +267,7 @@ struct DriveThruCoffeeStand
          bool openForBusiness = true;
 
 //      3) stores inventory of consumables 
-         struct inventoryItem
+         struct InventoryItem
          {
             char name[255];
             int  numberInStock;
@@ -280,7 +280,7 @@ struct DriveThruCoffeeStand
          inventoryItem storeInventory[32768]; // would we ever need more than 32767 different items?
 
 
-         struct menuItem
+         struct MenuItem
          {
             char name[255];
             int requiredIngredient; // this would be an inventory item ID number
@@ -291,7 +291,7 @@ struct DriveThruCoffeeStand
 
 
 //      4) stores financial transactions
-         struct individualSale
+         struct IndividualSale
          {
             int timeOfSale;
             int transactionID;
@@ -303,7 +303,7 @@ struct DriveThruCoffeeStand
 
 //      5) stores daily business metrics
 
-         struct dailyMetric
+         struct DailyMetric
          {
             float grossSales;
             float netProfits;
@@ -362,7 +362,7 @@ struct SmartPowerStrip
 {
 //   5 properties:
 //      1) network address(ip address/netmask/gateway/dns)
-         struct networkConfig
+         struct NetworkConfig
          {
             int ipAddress[4]; 
             int netmask[4];
@@ -374,7 +374,7 @@ struct SmartPowerStrip
 
 //      2) list of individual socket states (on/off) 
 
-         struct socketState
+         struct SocketState
          {
             bool enabled;
             bool toggling;
@@ -427,7 +427,7 @@ struct KitchenDroid
 {
 //   5 properties:
 //      1) Left/Right armature hardware installed: none, or one of several kitchen tool ID(s) assigned/loaded.
-         struct droidArmature
+         struct DroidArmature
          {
             bool   toolLoaded;
             int    loadedToolID;
@@ -442,7 +442,7 @@ struct KitchenDroid
          droidArmature droidArms[2];
 
 //      2) Inventory of alternate hardware(s) swappable. 
-         struct droidTools
+         struct DroidTools
          {
             char   name[255];
             int    toolFeature;
@@ -454,14 +454,14 @@ struct KitchenDroid
 
 //      3) List of activities performable with arm/tools 
 
-         struct armActions
+         struct ArmActions
          {
             char name[255];
             int  toolIDNeeded;
             droidArmature armChanges;
          };
 
-         struct armSequences
+         struct ArmSequences
          {
             char name[255];
             armActions sequence[32768];
@@ -471,7 +471,7 @@ struct KitchenDroid
 
 //      4) List of ingredients in stock
 
-         struct ingredient
+         struct Ingredient
          {
             char name[255];
             double amountAvailable;
@@ -482,7 +482,7 @@ struct KitchenDroid
 
 //      5) Menu of dishes Kitchen Droid can make
 
-         struct recipes
+         struct Recipes
          {
             ingredient ingredientsNeeded[32768];
             int toolUsed;
