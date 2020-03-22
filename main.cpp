@@ -264,7 +264,7 @@ struct DriveThruCoffeeStand
          int    colorBlue  = 200;
 
 //      2) open for business or not (boolean or array of times to be checked against)
-         bool openForBusiness = True;
+         bool openForBusiness = true;
 
 //      3) stores inventory of consumables 
          struct inventoryItem
@@ -277,7 +277,7 @@ struct DriveThruCoffeeStand
             bool perishable;
          };
 
-         inventoryItem storeInventory[32767]; // would we ever need more than 32767 different items?
+         inventoryItem storeInventory[32768]; // would we ever need more than 32767 different items?
 
 
          struct menuItem
@@ -286,7 +286,7 @@ struct DriveThruCoffeeStand
             int requiredIngredient; // this would be an inventory item ID number
          };
 
-         menuItem availableProducts[32767]; // that's a huge menu... actually, multiple entries for the same item for multi-ingredient
+         menuItem availableProducts[32768]; // that's a huge menu... actually, multiple entries for the same item for multi-ingredient
                                             // recipes. 
 
 
@@ -319,7 +319,7 @@ struct DriveThruCoffeeStand
 //      2) produce goods for order
          bool createProductAndUpdateInventory( menuItem orderItem ); 
 //      3) accept payment for goods
-         bool processPayment( individualSale tx, dailyMetrix log );
+         bool processPayment( individualSale tx, dailyMetric log );
          
 //
 };
@@ -422,7 +422,7 @@ struct SmartPowerStrip
 };
 //   ==============================
 //   (4)Kitchen Droid
-struct 
+struct KitchenDroid
 {
 //   5 properties:
 //      1) Left/Right armature hardware installed: none, or one of several kitchen tool ID(s) assigned/loaded.
@@ -438,7 +438,7 @@ struct
 //
 //   ==============================
 //   (5)Apple Store
-struct 
+struct AppleStore
 {
 //   5 properties:
 //      1) Inventory of Apple products
@@ -454,7 +454,7 @@ struct
 //
 //   ==============================
 //   (6)Wild Squirrel
-struct 
+struct WildSquirrel
 {
 //   5 properties:
 //      1) Number of nuts in mouth
@@ -470,7 +470,7 @@ struct
 //
 //   ==============================
 //   (7)Dungeon Master 
-struct 
+struct DungeonMaster
 {
 //   5 properties:
 //      1) List of voices and personas capable of enacting
@@ -486,7 +486,7 @@ struct
 //
 //   ==============================
 //   (8)D&D Party Members
-struct 
+struct DNDPartyMembers
 {
 //   5 properties:
 //      1) Player character stats/attributes(age, sex, race, armor class, pasive perception, etc)
@@ -502,7 +502,7 @@ struct
 //
 //   ==============================
 //   (9)Self Checkout Register
-struct 
+struct SelfCheckoutRegister
 {
 //   5 properties:
 //      1) has screen for user interface
@@ -517,7 +517,7 @@ struct
 };
 //   ==============================
 //   (10)Gaming Store
-struct 
+struct GamingStore
 {
 //   5 properties:
 //      1) [Self Checkout Register]
