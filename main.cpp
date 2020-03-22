@@ -364,9 +364,9 @@ struct SmartPowerStrip
 //      1) network address(ip address/netmask/gateway/dns)
          struct networkConfig
          {
-            char ipAddress[4]; 
-            char netmask[4];
-            char gateway[4];
+            int ipAddress[4]; 
+            int netmask[4];
+            int gateway[4];
             bool configured;
             bool online;
          };
@@ -388,23 +388,37 @@ struct SmartPowerStrip
 
 //      3) stored history of power consumption per socket 
 
-
-
+         struct powerDataPoint
+         {
+            double uptime;
+            double powerConsumed=0.0;
+            bool   socketState; // true = on, false = off
+         };
 
 //      4) stored history of socket state changes
+         
+        powerDataPoint socketHistory[32768];
 
 //      5) stored 'uptime' value
 
+        double uptime; 
 
 //   3 things it can do:
 //      1) change individual socket state: on-to-off,off-to-on,toggle/bounce
 
+         void socketOff( int socket );
+         void socketOn(  int socket );
+         void socketToggle( int socket, float waitBeforeOn );
+         bool getSocketState( int socket );
+
 //      2) perform global socket change: all on, all off, all toggle/bounce
 
+         void allSocketOn();
+         void allSocketOff();
+         void allSocketToggle( float waitBeforeOn );
+
 //      3) reconfigure network settings
-
-
-//
+         void setIP( int ip[4], int netmask[4], int gateway[4] );
 };
 //   ==============================
 //   (4)Kitchen Droid
