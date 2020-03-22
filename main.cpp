@@ -418,24 +418,77 @@ struct SmartPowerStrip
          void allSocketToggle( float waitBeforeOn );
 
 //      3) reconfigure network settings
-         void setIP( int ip[4], int netmask[4], int gateway[4] );
+         void setIP( networkConfig newConfig );
 };
+
 //   ==============================
 //   (4)Kitchen Droid
 struct KitchenDroid
 {
 //   5 properties:
 //      1) Left/Right armature hardware installed: none, or one of several kitchen tool ID(s) assigned/loaded.
+         struct droidArmature
+         {
+            bool   toolLoaded;
+            int    loadedToolID;
+            int    currentAction;
+            double powerDeliveredToTool;
+            double rateOfMovement;
+            double segmentRotationX[3];
+            double segmentRotationY[3];
+            double segmentRotationZ[3];
+         };
+
+         droidArmature droidArms[2];
+
 //      2) Inventory of alternate hardware(s) swappable. 
+         struct droidTools
+         {
+            char   name[255];
+            int    toolFeature;
+            double toolPositionX, toolPositionY, toolPositionZ;
+            bool   toolUsesPower;
+         };
+
+         droidTools availableTools[255];
+
 //      3) List of activities performable with arm/tools 
+
+         struct armActions
+         {
+            char name[255];
+            int  toolIDNeeded;
+            droidArmature armChanges;
+         };
+
+         struct armSequences
+         {
+            char name[255];
+            armActions sequence[32768];
+         };
+
+         armSequences availableActions[32768]; 
+
 //      4) List of ingredients in stock
+
+
+
+
+
 //      5) Menu of dishes Kitchen Droid can make
+
+
 //   3 things it can do:
 //      1) Prepare Meal From Menu
+
 //      2) Swap tools
+
 //      3) Validate menu choice with available tools, ingredients,and actions available. 
+
+
 };
-//
+
+
 //   ==============================
 //   (5)Apple Store
 struct AppleStore
