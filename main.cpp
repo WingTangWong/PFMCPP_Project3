@@ -828,46 +828,32 @@ struct GamingStore
 {
 //   5 properties:
 //      1) [Self Checkout Register]
+         SelfCheckoutRegister availableRegisters[MAX_ID];
+         DriveThruCoffeeStand gamingStore[MAX_ID];
 
 //      2) [Microwave]
+         Microwave availableMicrowaves[MAX_ID];
 
 //      3) [D&D Party Members]
+         DNDPartyMembers registeredDNDPartyMemberRoster[MAX_ID];
 
 //      4) [Dungeon Master]
+         DungeonMaster registeredDungeonMasterRoster[MAX_ID];
 
 //      5) [Smart Power Strip]
-
+         SmartPowerStrip availableSmartPowerStrips[MAX_ID];
 
 //   3 things it can do:
 //      1) Host Game Sessions   (for the dungeon masters and d&d players, microwave for food)
+         bool scheduleGamingSession( double desiredStartTime, double desiredEndTime, int partySize, int numberOfTables );
 
 //      2) Sell Gaming Supplies (dice, paper, books, self-checkout)
+         void ringUpSupplies( int registerID, int storeID, int transactionID );
 
 //      3) Users can pay for power (smart power strip, self-checkout)
-
+         void payForPower( int registerID, int powerStripID, int tableID, int memberID );
 
 };
-
-
-
-
-
-/*
-10)
-5 properties:
- These 5 properties should be UDTs that you defined above.
- this goes along with the instruction:
-    One of your 10 UDTs should only use UDTs for its member variable types.
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
 
 #include <iostream>
 int main()
