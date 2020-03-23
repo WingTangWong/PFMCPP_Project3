@@ -740,23 +740,86 @@ struct SelfCheckoutRegister
 {
 //   5 properties:
 //      1) has screen for user interface
+         struct MenuItem
+         {
+            char name[MAX_NAME_LENGTH];
+            int  menuFunctionID; 
+         };
+
+         MenuItem userInterfaceOptions[MAX_ID];
 
 //      2) has scanner for products
 
+         struct ScannerData
+         {
+            bool validReading;
+            int  readBarCodeValue;
+         };
+
 //      3) has scale for bagging and validation of products
+        
+         struct StoreItem
+         {
+            char name[MAX_NAME_LENGTH];
+            int  barCode;
+            double weight;
+            double weightVariance;
+            double price;
+         };
+
+         struct ShoppingScale
+         {
+            bool weightValueChange;
+            double retrievedValue;
+         };
+          
+         ShoppingScale transactionWeightLog[MAX_LOG_LENGTH];
+         StoreItem     transactionItemLog[MAX_LOG_LENGTH];
 
 //      4) has payment interface
+         struct PaymentOptions
+         {
+            char name[MAX_NAME_LENGTH];
+            int  paymentInterface;
+            bool contactLessPayment;
+            bool magneticStrip;
+            bool smartChip;
+         };
+
+         PaymentOptions paymentInterfaceOptions[MAX_ID];
 
 //      5) has receipt printer
+
+         struct ReceiptPrinter
+         {
+            bool hasPaper;
+            bool online;
+            bool transactionStarted;
+            bool currentlyPrinting;
+            bool readyForNewOutput;
+         };
+
+         struct ReceiptEntry
+         {
+            int itemID;
+            double price;
+            double tax;
+            int discountCode;
+            double discountedPrice;
+         };
+
+         ReceiptEntry receiptToPrint[MAX_LOG_LENGTH];
 
 
 //   3 things it can do:
 //      1) ring up item
+         void ringUpItem( int itemID );
 
 //      2) accept payment
+         bool processPayment( int paymentOptionSelected, int transactionID );
 
 //      3) print receipt
-
+         bool printReceipt( int transactionID );
 
 };
 //   ==============================
