@@ -610,6 +610,14 @@ struct WildSquirrel
 };
 //
 //   ==============================
+struct Dice
+{
+   char name[MAX_NAME_LENGTH]; // yes... some dice get names...
+   int numberOfSides;
+};
+
+
+
 //   (7)Dungeon Master 
 struct DungeonMaster
 {
@@ -625,12 +633,6 @@ struct DungeonMaster
          Voice dungeonMasterVoices[MAX_ID];
 
 //      2) List of various dice to roll for actions/effects
-         struct Dice
-         {
-            char name[MAX_NAME_LENGTH]; // yes... some dice get names...
-            int numberOfSides;
-         };
-
          Dice bagOfDice[MAX_ID];
 
 //      3) List of ideas on how to manipulate the party
@@ -694,24 +696,42 @@ struct DNDPartyMembers
 {
 //   5 properties:
 //      1) Player character stats/attributes(age, sex, race, armor class, pasive perception, etc)
-
+         struct PlayerStats
+         {
+            char name[MAX_NAME_LENGTH];
+            char race[MAX_NAME_LENGTH];
+            int  experiencePoints;
+            int  intelligence;
+            int  wisdom;
+            int  charisma;
+            int  dexterity;
+            int  constitution;
+            int  strength;
+            int  hitPoints;
+            int  armorClass;
+            int  passivePerception;
+            int  initiativeBonus;
+            int  level;
+         };
 //      2) Assortment of dice for rolling for actions and effects
+         Dice bagOfDice[MAX_ID];
 
 //      3) Is a murderhobo (bool) (senselessly killing non-player-characters in game)
+         bool murderHobo;
 
 //      4) Fearful of Dungeon Master (bool)
+         bool fearsDungeonMaster;
 
 //      5) How badly they want to kill "that partymember" (double)
-
+         float partyMemberDeathWish;
 
 //   3 things it can do:
 //      1) Fulfill quests
-
+         bool pursueQuest(int questID);
 //      2) Listen to the dungeon master's amazing voices
-
+         void enjoyDungeonMasterVoices();
 //      3) Roll for initiative
-
-
+         int rollForInitiative();         
 };
 //
 //   ==============================
