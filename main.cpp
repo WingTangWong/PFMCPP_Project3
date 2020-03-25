@@ -12,12 +12,128 @@ Create a branch named Part2
     You'll need to insert the Person struct from the video in the space below.
  */
 
+#include <iostream>
+using namespace std;
 
+struct Limb
+{
+    float limbLength;
+    float stepSize;
+    float stepPosition;
+    bool  hasLeftFoot;
 
+    Limb()
+    {
+        stepPosition=0.0f; // Neutral position
+        stepSize=1.0f;
+        limbLength=1.0f;
+    }
 
+    float getStepSize( )
+    {
+        return stepSize;
+    }
+
+    void setStepSize( float newStepSize )
+    {
+        stepSize=newStepSize;
+    }
+
+    bool stepForward()
+    {
+        // Attempt stepping forward with this limb.
+        // Return false if limb is already stepped forward
+        if ( stepPosition> 0 ) 
+        { 
+            return false; 
+        } 
+        else 
+        { 
+            stepPosition = stepPosition + stepSize;
+            return true;
+        };
+    }
+
+    bool stepBackward()
+    {
+        // Attempt stepping forward with this limb.
+        // Return false if limb is already stepped forward
+        if ( stepPosition < 0 ) 
+        { 
+            return false; 
+        } 
+        else 
+        { 
+            stepPosition = stepPosition - stepSize;
+            return true;
+        };
+    }
+};
+
+struct Person
+{
+    Limb leftLeg;
+    Limb rightLeg;
+    int age;
+    int height;
+    float hairLength;
+    float GPA;
+    unsigned int SATScore;
+    
+    float run(float howFast=0.0f, float distance=5.0f, bool startWithLeftFoot=true)
+    {
+        bool activeLimbIsLeft=startWithLeftFoot;
+        float stepSize[2];
+        float distanceRan=0.0f;
+
+        if ( howFast > 0 ) {
+            leftLeg.setStepSize(howFast);
+            rightLeg.setStepSize(howFast);
+        } else {
+            leftLeg.setStepSize(1);
+            rightLeg.setStepSize(1);
+        };
+
+        stepSize[0]=leftLeg.getStepSize();
+        stepSize[1]=rightLeg.getStepSize();
+
+        cout << "Running:: starting run distance of " << distance << "." << endl;
+        while( distanceRan < distance )
+        {
+            if ( activeLimbIsLeft ) {
+                if ( leftLeg.stepForward() ) {
+                    // We successfully moved left foot forward!
+                    distanceRan = distanceRan + stepSize[0];
+                    // Left leg moving foward equates to right leg having been moved backwards.
+                    rightLeg.stepBackward();
+                    cout << "Running:: Left Leg forwards, Right leg back. [Distance ran " << distanceRan << "]" << endl;
+                } else { 
+                    // Failed. We'll skip.
+                    cout << "Left leg was already in forward position. Skipping." << endl;
+                };
+            }
+            else
+            {
+                if ( rightLeg.stepForward() ) {
+                    // Successfully moved right leg/foot forward!
+                    distanceRan = distanceRan + stepSize[1];
+                    leftLeg.stepBackward();
+                    cout << "Running:: Right Leg forwards, Left leg back. [Distance ran " << distanceRan << "]" << endl;
+                } else {
+                    cout << "Right leg was already in forward position. Skipping." << endl;
+                };
+            };
+            activeLimbIsLeft = !activeLimbIsLeft;
+        };
+        cout << "Running:: Completed. Distance ran: " << distanceRan << "." << endl;
+        return distanceRan;
+    }
+};
 
  /*
  2) provide implementations for the member functions you declared in your 10 user-defined types from the previous video outside of your UDT definitions.
+
+ ** Done below in the structs
  
  3) be sure to write the correct full qualified name for the nested type's member functions.
  
@@ -71,7 +187,13 @@ struct DriveThruCoffeeStand
         bool perishable;
     };
 
-    InventoryItem storeInventory[MAX_ID]; // would we ever need more than 32767 different items?
+    // Small change to make life easier (array declaration convert to struct with an array inside)
+    struct Inventory
+    {
+        InventoryItem inventory[MAX_ID];
+    };
+
+    InventoryItem storeInventory;
 
 
     struct MenuItem
@@ -80,7 +202,12 @@ struct DriveThruCoffeeStand
         int requiredIngredient; // this would be an inventory item ID number
     };
 
-    MenuItem availableProducts[MAX_ID]; // that's a huge menu... actually, multiple entries for the same item for multi-ingredient
+    // Small change to make life easier (array declaration convert to struct with an array inside)
+    struct Menu
+    {
+        MenuItem menu[MAX_ID];
+    };
+    Menu availableProducts; // that's a huge menu... actually, multiple entries for the same item for multi-ingredient
     // recipes.
 
 
@@ -108,12 +235,33 @@ struct DriveThruCoffeeStand
 
     // 3 things it can do:
     // 1) take orders
-    bool takeOrder( MenuItem orderItem ); // returns false if the order is invalid, true if the order is valid
+    bool takeOrder( MenuItem orderItem , Inventory *inventory)
+    {
+        // Need to validate if in inventory
+        // Need to update financialTransactions
+           
+        
+    }; // returns false if the order is invalid, true if the order is valid
 
     // 2) produce goods for order
-    bool createProductAndUpdateInventory( MenuItem orderItem );
+    bool createProductAndUpdateInventory( MenuItem orderItem, Inventory *inventory)
+    {
+        // Need to access the whole of the inventory
+        // Need to access the whole of the menuitems
+        // Deduct from inventory and add to menuitems
+      
+          
+        
+        
+        
+    };
     // 3) accept payment for goods
-    bool processPayment( IndividualSale tx, DailyMetric log );
+    bool processPayment( IndividualSale tx, DailyMetric log )
+    {
+        
+        
+        
+    };
 };
 
 // ==============================
@@ -135,18 +283,34 @@ struct Microwave
     // 5) time remaining
     float remainingTime;
 
-
-
     // 3 things it can do:
     // 1) open/close door
-    void doorChangeState( bool openDoor );
+    void doorChangeState( bool openDoor )
+    {
+        
+        
+        
+    };
 
     // 2) set time/power levels
-    void setPowerLevel( int newPowerLevel );
-    void setTimer( int newTimeRemaining );
+    void setPowerLevel( int newPowerLevel )
+    {
+        
+        
+    };
+
+    void setTimer( int newTimeRemaining )
+    {
+        
+        
+    };
 
     // 3) start/stop
-    void startMicrowave();
+    void startMicrowave()
+    {
+        
+        
+    };
 };
 
 // ==============================
@@ -198,19 +362,52 @@ struct SmartPowerStrip
     // 3 things it can do:
     // 1) change individual socket state: on-to-off,off-to-on,toggle/bounce
 
-    void socketOff( int socket );
-    void socketOn(  int socket );
-    void socketToggle( int socket, float waitBeforeOn );
-    bool getSocketState( int socket );
+    void socketOff( int socket )
+    {
+        
+    };
+
+    void socketOn(  int socket )
+    {
+        
+    };
+
+    void socketToggle( int socket, float waitBeforeOn )
+    {
+        
+    };
+
+    bool getSocketState( int socket )
+    {
+
+
+    };
 
     // 2) perform global socket change: all on, all off, all toggle/bounce
 
-    void allSocketOn();
-    void allSocketOff();
-    void allSocketToggle( float waitBeforeOn );
+    void allSocketOn()
+    {
+
+    };
+
+    void allSocketOff()
+    {
+        
+    };
+
+    void allSocketToggle( float waitBeforeOn )
+    {
+        
+        
+        
+    };
 
     // 3) reconfigure network settings
-    void setIP( NetworkConfig newConfig );
+    void setIP( NetworkConfig newConfig )
+    {
+        
+        
+    };
 };
 
 // ==============================
@@ -641,8 +838,10 @@ struct GamingStore
 
 };
 
-#include <iostream>
 int main()
 {
+    Person john;
+
+    john.run(1.2f, 15.6f, true);
     std::cout << "good to go!" << std::endl;
 }
