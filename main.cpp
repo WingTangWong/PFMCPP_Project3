@@ -186,13 +186,10 @@ struct DriveThruCoffeeStand
         float itemWeight;
         bool perishable;
     };
-
-    // Small change to make life easier (array declaration convert to struct with an array inside)
     struct Inventory
     {
         InventoryItem inventory[MAX_ID];
     };
-
     InventoryItem storeInventory;
 
 
@@ -201,15 +198,20 @@ struct DriveThruCoffeeStand
         char name[MAX_NAME_LENGTH];
         int requiredIngredient; // this would be an inventory item ID number
     };
-
-    // Small change to make life easier (array declaration convert to struct with an array inside)
     struct Menu
     {
         MenuItem menu[MAX_ID];
     };
-    Menu availableProducts; // that's a huge menu... actually, multiple entries for the same item for multi-ingredient
-    // recipes.
+    Menu availableProducts; // that's a huge menu... actually, multiple entries for the same item for multi-ingredient recipes;
 
+    struct Orders
+    {
+        int transactionID;
+        int menuItems[MAX_LOG_LENGTH];
+        int quantity[MAX_LOG_LENGTH];
+    };
+
+    Orders orders;
 
     // 4) stores financial transactions
     struct IndividualSale
@@ -219,19 +221,27 @@ struct DriveThruCoffeeStand
         int itemID;
         bool refunded;
     };
+    struct SalesLog
+    {
+        IndividualSale transactions[MAX_LOG_LENGTH];
+    };
+    SalesLog transactions;
 
-    IndividualSale financialTransactions[MAX_LOG_LENGTH]; // I'm sure this will be fine....
+
 
     // 5) stores daily business metrics
-
     struct DailyMetric
     {
         float grossSales;
         float netProfits;
         float totalRefunded;
     };
+    struct BusinessLog
+    {
+        DailyMetric businessLog[MAX_LOG_LENGTH];
+    };
+    BusinessLog businessLog;
 
-    DailyMetric businessLog[MAX_LOG_LENGTH];
 
     // 3 things it can do:
     // 1) take orders
